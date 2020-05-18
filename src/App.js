@@ -13,7 +13,7 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { Style, Fill, Stroke } from "ol/style";
 import { SimpleButton, MapComponent } from "@terrestris/react-geo";
-import { Drawer, List, Typography, Divider } from "antd";
+import { Drawer, List, Typography } from "antd";
 import { Collapse } from "antd";
 
 import tracks from "./data/tracks";
