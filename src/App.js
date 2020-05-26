@@ -4,22 +4,25 @@ import "./App.css";
 import "ol/ol.css";
 import "antd/dist/antd.css";
 import "./react-geo.css";
-
 import OlMap from "ol/Map";
 import OlView from "ol/View";
 import OlLayerTile from "ol/layer/Tile";
 import OlSourceOsm from "ol/source/OSM";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { Style, Fill, Stroke } from "ol/style";
+import { Style, Icon, Fill, Stroke } from "ol/style";
 import { SimpleButton, MapComponent } from "@terrestris/react-geo";
-import { Drawer, List, Typography } from "antd";
-import { Collapse } from "antd";
+import { Drawer } from "antd";
 
-import tracks from "./data/tracks";
-import geoUtil from "./geoUtil";
+import tracks from "./data/tracks.json";
+import outdoorGyms from "./data/outdoorGyms.json";
+import huddingeJson from "./data/huddinge.json";
+import FeaturePanel from "./components/FeaturePanel";
 
-const { Panel } = Collapse;
+import gymImg from "./img/gym.png";
+
+import geoUtil from "./util/geoUtil";
+import mapUtil from "./util/mapUtil";
 
 geoUtil.registerProjections();
 
@@ -29,8 +32,15 @@ const osmLayer = new OlLayerTile({
 
 const view = new OlView({
   projection: "EPSG:3006",
-  center: [669922, 6570167], // EPSG:3011 - SWEREF99 18 00,
-  zoom: 16,
+  center: [672382.9310966722, 6567779.94859146],
+  zoom: 12,
+  maxZoom: 20,
+  extent: [ // extent = kommun extent buff 75000
+    655435.1179635252,
+    6552348.911293099,
+    689330.7442298192,
+    6583210.985889821,
+  ],
 });
 
 const map = new OlMap({
@@ -57,6 +67,39 @@ const trackFeatures = geoUtil.toFeatures(tracks);
 trackLayer.getSource().addFeatures(trackFeatures);
 map.addLayer(trackLayer);
 
+var iconStyle = new Style({
+  image: new Icon({
+    src: gymImg,
+    scale: 1,
+  }),
+});
+
+var outDoorGymLayer = new VectorLayer({
+  source: new VectorSource({}),
+});
+
+const outDoorGymsFeatures = geoUtil.toFeatures(outdoorGyms);
+outDoorGymsFeatures.map((gym) => gym.setStyle(iconStyle));
+outDoorGymLayer.getSource().addFeatures(outDoorGymsFeatures);
+map.addLayer(outDoorGymLayer);
+
+var kommunLayer = new VectorLayer({
+  source: new VectorSource({}),
+  style: new Style({
+    stroke: new Stroke({
+      color: "grey",
+      width: 3,
+    }),
+    fill: new Fill({
+      color: "rgba(232, 232, 232, 0.5)",
+    }),
+  }),
+});
+
+var kommunFeature = mapUtil.getHuddingeKommunFeature(huddingeJson);
+kommunLayer.getSource().addFeature(kommunFeature);
+map.addLayer(kommunLayer);
+
 /*
 map.on("click", (e) => {
   console.log(e.coordinate);
@@ -70,10 +113,19 @@ function App() {
     setVisible(!visible);
   };
 
-  const areaNames = geoUtil.getSortedAreaName(trackFeatures);
+  const trackNames = geoUtil.getSortedFeatureName(trackFeatures);
+  const gymNames = geoUtil.getSortedFeatureName(outDoorGymsFeatures);
 
-  const centerOnTrack = (areaName) => {
-    var extent = geoUtil.getTrackExtent(trackFeatures, areaName);
+  const centerOnTrack = (trackName) => {
+    var extent = geoUtil.getExtentOfFeaturesByName(trackFeatures, trackName);
+    view.fit(extent, { padding: [200, 20, 200, 20] });
+  };
+
+  const centerOnGym = (gymName) => {
+    var extent = geoUtil.getExtentOfFeaturesByName(
+      outDoorGymsFeatures,
+      gymName
+    );
     view.fit(extent, { padding: [200, 20, 200, 20] });
   };
 
@@ -92,24 +144,16 @@ function App() {
         visible={visible}
         mask={false}
       >
-        <Collapse onChange={() => console.log("collapse!")}>
-          <Panel header="Elljusspår" className="track-panel" key="1">
-            {/*<Divider orientation="left">Elljusspår</Divider>*/}
-            <List
-              /*header={<div>Header</div>}*/
-              /*footer={<div>Footer</div>}*/
-              /*bordered*/
-              dataSource={areaNames}
-              renderItem={(areaName) => (
-                <List.Item>
-                  <Typography.Text onClick={() => centerOnTrack(areaName)}>
-                    {areaName}
-                  </Typography.Text>
-                </List.Item>
-              )}
-            />
-          </Panel>
-        </Collapse>
+        <FeaturePanel
+          headerText="Elljusspår"
+          featureName={trackNames}
+          onFeatureClicked={centerOnTrack}
+        />
+        <FeaturePanel
+          headerText="Utegym"
+          featureName={gymNames}
+          onFeatureClicked={centerOnGym}
+        />
       </Drawer>
     </div>
   );

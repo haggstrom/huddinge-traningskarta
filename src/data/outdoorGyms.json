@@ -1,0 +1,68 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [148474.11, 6564112.89] },
+      "properties": {
+        "name": "Utegym vid Gladö lekplats"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [147798.45, 6566675.55] },
+      "properties": {
+        "name": "Naturgym vid Visättra sportcenter"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [149275.62, 6569397.63] },
+      "properties": {
+        "name": "Utegym i Rådsparken"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [147185.43, 6570357.45] },
+      "properties": {
+        "name": "Utegym vid Källbrinks IP "
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [148026.9, 6572331.39] },
+      "properties": {
+        "name": "Naturgym vid Tranparken"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [149788.74, 6570381.53] },
+      "properties": {
+        "name": "Utegym i Skeppsmyreparken"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [155954.28, 6567599.4] },
+      "properties": {
+        "name": "Ågesta friluftsområde"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [158312.97, 6567754.68] },
+      "properties": {
+        "name": "Hinderbana och utegym i Nytorps mosse"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [158980.44, 6568762.71] },
+      "properties": {
+        "name": "Utegym i Sjöängsparken"
+      }
+    }
+  ]
+}

@@ -9,6 +9,14 @@ body,
   width: 100%;
 }
 
+.ant-collapse.feature-panel {
+  margin-bottom: 10px;
+}
+
+.ant-typography.feature-name-text {
+  cursor: pointer;
+}
+
 .track-panel .ant-collapse-content-box {
   padding: 0px 20px 0px 20px !important;
 }
