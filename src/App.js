@@ -26,12 +26,11 @@ import Select from "ol/interaction/Select";
 
 import Overlay from "ol/Overlay";
 import { pointerMove } from "ol/events/condition";
+import {defaults} from 'ol/interaction';
 
 import styles from "./util/styles";
 
 import AuthorPanel from "./components/AuthorPanel";
-
-
 
 const POPUP_ID = "my-popup";
 
@@ -54,10 +53,11 @@ const view = new OlView({
     6583210.985889821,
   ],
 });
-
+var interactions = defaults({altShiftDragRotate:false, pinchRotate:false});
 const map = new OlMap({
   view: view,
   layers: [osmLayer],
+  interactions: interactions,
 });
 
 const kommunLayer = new VectorLayer({
@@ -169,7 +169,11 @@ function App() {
     <div className="App">
       <MapComponent map={map} />
 
-      <SimplePopup popupId={POPUP_ID} title={hoveredFeatureType} text={hoveredFeatureName} />
+      <SimplePopup
+        popupId={POPUP_ID}
+        title={hoveredFeatureType}
+        text={hoveredFeatureName}
+      />
 
       <SimpleButton
         title="Visa Träningsplatser"
