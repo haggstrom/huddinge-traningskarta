@@ -55,10 +55,13 @@ const geoUtil = {
     });
   },
 
-  toFeatures: (tracks) => {
-    var trackFeatures = geoUtil.readFeatures(tracks);
-    geoUtil.transformFeatures(trackFeatures, "EPSG:3011", "EPSG:3006");
-    return trackFeatures;
+  toFeatures: (geoJson, type) => {
+    var features = geoUtil.readFeatures(geoJson);
+    features.map((tf) => {
+      return tf.setProperties({ type: type });
+    });
+    geoUtil.transformFeatures(features, "EPSG:3011", "EPSG:3006");
+    return features;
   },
 
   getBufferedExtent: (feature, bufferVal) => {

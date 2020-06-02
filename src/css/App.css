@@ -1,0 +1,37 @@
+html,
+body,
+#root,
+.App,
+#map {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.showDrawerButton {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+}
+
+.ant-drawer-body {
+  padding: 18px !important;
+}
+
+.ant-drawer-footer {
+  padding: 0px !important;
+  border: 0px !important;
+}
+
+.ant-drawer-footer .ant-card-head-title {
+  padding: 4px 0px !important;
+}
+
+.ant-drawer-footer .ant-card-body {
+  padding: 8px !important;
+}
+
+.trainingLocationPanel .ant-collapse-content-box {
+  padding: 0px 16px 0px 16px;
+}

@@ -1,0 +1,11 @@
+.popupContainer {
+  display: none;
+}
+
+.popupCard {
+  width: 150px;
+}
+
+.popupCard p {
+  margin: 0px;
+}

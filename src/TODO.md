@@ -1,10 +1,14 @@
 # TODO
 
-## setp 2
+## step 3
 
-- Inkapsla karta i komponent
-- Fixa stil på gym ikoner
-- Fixa stil på track
+- Hooks, refactor/inkapsla karta etc?
+- Utvärdera mobilanvändning
+- Mobilanpassad:
+  - Disable Rotate
+  - Disable lower menu.
+
+## step 4
+
 - unittesting
-- Info on hoover
 - vandringsleder
