@@ -57,6 +57,12 @@ const gymFeatures = geoUtil.toFeatures(outdoorGyms, "gym");
 const gymLayer = mapUtil.createGymLayer(gymFeatures);
 map.addLayer(gymLayer);
 
+const popup = new Overlay({});
+
+const onPopupClose = () => {
+  popup.setPosition(undefined);
+};
+
 function App() {
   const [visible, setVisible] = useState(false);
   const [hoveredFeatureName, setHoveredFeatureName] = useState("");
@@ -64,13 +70,7 @@ function App() {
 
   const trackNames = geoUtil.getSortedFeatureName(trackFeatures);
   const gymNames = geoUtil.getSortedFeatureName(gymFeatures);
-
-  const popup = new Overlay({});
-
-  const onPopupClose = () => {
-    popup.setPosition(undefined);
-  };
-
+  
   const toggleDrawer = () => {
     setVisible(!visible);
   };
