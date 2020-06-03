@@ -64,8 +64,12 @@ const geoUtil = {
     return features;
   },
 
+  bufferExtent: (extent, bufferValue) => {
+    return buffer(extent, bufferValue);
+  },
+
   getBufferedExtent: (feature, bufferVal) => {
-    return buffer(feature.getGeometry().getExtent(), bufferVal);
+    return geoUtil.bufferExtent(feature.getGeometry().getExtent(), bufferVal);
   },
 
   extentToFeature: (extent) => {

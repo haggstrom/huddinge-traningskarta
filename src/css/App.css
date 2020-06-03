@@ -15,6 +15,14 @@ body,
   right: 10px;
 }
 
+.ol-attribution.ol-uncollapsible {
+  display: none;
+}
+
+.ant-drawer-header {
+  padding: 16px 18px;
+}
+
 .ant-drawer-body {
   padding: 18px !important;
 }

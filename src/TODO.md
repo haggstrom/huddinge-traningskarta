@@ -1,8 +1,6 @@
 # TODO
 
-## step 4
+## step 5
 
-- Keep hover, but open popup on click.
-- Hooks, refactor/inkapsla karta etc?
+- Hooks, refactor/inkapsla karta
 - unittesting
-- vandringsleder
